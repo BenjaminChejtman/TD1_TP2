@@ -1,7 +1,7 @@
 from haversine import haversine , Unit
 
 class CampanaVerde:
-    def __init__(self, d:str, b:str, c:int, m:set[str], lat:float, lon:float):
+    def __init__(self, d:str, b:str, c:int, m:set[str], latylon:tuple[float, float]):
         ''' completar docstring '''
         self.direccion:str = d
         self.barrio:str = b
@@ -9,7 +9,7 @@ class CampanaVerde:
         self.materiales:set[str] = m
         #self.latitud:float = lat
         #self.longitud:str = lon
-        self.latitudylongitud:tuple[float, float]
+        self.latitudylongitud:tuple[float, float] = latylon
 
     def distancia(self, ubicacionCampana:tuple[float, float], punto:tuple[float, float]) -> tuple[float, float]:     
         ''' 
