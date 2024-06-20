@@ -7,8 +7,9 @@ class CampanaVerde:
         self.barrio:str = b
         self.comuna:int = c
         self.materiales:set[str] = m
-        self.latitud:float = lat
-        self.longitud:str = lon
+        #self.latitud:float = lat
+        #self.longitud:str = lon
+        self.latitudylongitud:tuple[float, float]
 
     def distancia(self, ubicacionCampana:tuple[float, float], punto:tuple[float, float]) -> tuple[float, float]:     
         ''' 
