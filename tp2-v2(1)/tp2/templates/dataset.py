@@ -1,4 +1,5 @@
-from campana_verde import CampanaVerde 
+from haversine import haversine , Unit
+from campana_verde import CampanaVerde
 import csv
 
 class DataSetCampanasVerdes:
@@ -13,9 +14,9 @@ class DataSetCampanasVerdes:
             barrio:str=linea['barrio']
             comuna:int=linea['comuna']
             materiales:set[str]=set(linea['materiales'].split('/'))
-            latylon:tuple[float, float] = tuple(float(linea['WKT'][6:].split(' '))) #ESTO NO ES CORRECTO PORQUE NO SON SIEMPRE IGUAL DE LARGOS!
+            latitudylongitud:tuple[float, float] = (0.0, 0.0) #ESTO NO ES CORRECTO PORQUE NO SON SIEMPRE IGUAL DE LARGOS!
             #longitud:float = float(linea['WKT'][25:41])          
-            campana:CampanaVerde=CampanaVerde(direccion,barrio,comuna,materiales,latylon)
+            campana:CampanaVerde=CampanaVerde(direccion,barrio,comuna,materiales,latitudylongitud)
             self.campanas.append(campana)
         f.close()    
 
@@ -75,22 +76,23 @@ class DataSetCampanasVerdes:
             distancias[campana] = dist
             distanciasList.append(dist)
         distanciasList.sort()
-        distancias[0] =  
-        cerca1 = 
-        res:tuple[CampanaVerde, CampanaVerde, CampanaVerde] = {, }
-        return res
+        #distancias[0] =  
+        #cerca1 = 
+        #res:tuple[CampanaVerde, CampanaVerde, CampanaVerde] = {, }
+        #return res
             
 
-    def exportar_por_materiales(self, archivo_csv, materiales:set[str]) -> ...:
-        f = open('archivo_csv', 'w')
-        f.write('DIRECCION')
-        f.write('BARRIO')
+    def exportar_por_materiales(self, materiales:set[str]):
+        f2 = open('archivo_csv', 'w')
+        f2.write('DIRECCION y BARRIO')
         for campana in self.campanas:
             if materiales in campana.materiales:
-                f.write(campana + '\n')
-        f.close()
+                f2.write(campana.direccion + campana.barrio + '\n')
+        f2.close()
         
 
 
 d:DataSetCampanasVerdes = DataSetCampanasVerdes('campanas-verdes-acortado.csv')
-print(d.cantidad_por_barrio(' Metal ')) #los materiales vienen con el espacio que tienen en el CSV deberia eliminarse o darse por hecho que el usuario lo usara correctamente?
+#print(d.barrios())
+print(d.cantidad_por_barrio('Papel '))
+#print(d.exportar_por_materiales({' Vidrio'})) #los materiales vienen con el espacio que tienen en el CSV deberia eliminarse o darse por hecho que el usuario lo usara correctamente?
