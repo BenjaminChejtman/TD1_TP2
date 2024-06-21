@@ -33,9 +33,9 @@ class TestCampanaVerde(unittest.TestCase):
         puntoprueba2:tuple[float, float]=(-32.55112612347545, -59.433578911529196)
         puntoprueba3:tuple[float, float]=(-20.57265573450225, -18.472841445)
         
-        self.assertEqual(campana1.distancia(puntoprueba1), 0.0) #Caso en el que son el mismo punto, por lo que su distancia corresponde que sea 0.0
-        self.assertEqual(campana2.distancia(puntoprueba2), 240841.14170973774) #Caso con un resultado menor
-        self.assertEqual(campana3.distancia(puntoprueba3), 7921235.699038102) #Caso co un resultado mayor
+        self.assertAlmostEqual(campana1.distancia(puntoprueba1), 0.0) #Caso en el que son el mismo punto, por lo que su distancia corresponde que sea 0.0
+        self.assertAlmostEqual(campana2.distancia(puntoprueba2), 240841.14170973774) #Caso con un resultado menor
+        self.assertAlmostEqual(campana3.distancia(puntoprueba3), 7921235.699038102) #Caso co un resultado mayor
 
     
     def test_repr(self):
