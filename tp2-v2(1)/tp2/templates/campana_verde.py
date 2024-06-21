@@ -11,7 +11,7 @@ class CampanaVerde:
         #self.longitud:str = lon
         self.latitudylongitud:tuple[float, float] = latylon
 
-    def distancia(self, punto:tuple[float, float]) -> tuple[float, float]:     
+    def distancia(self, punto:tuple[float, float]) -> float:     
         ''' 
         Requiere: una direccion valida con el eje X (o latitud) en el primer float de la tupla y con el eje Y (o longitud) en el segundo float de la tupla
         Devuelve: La distancia entre el punto 1 y el punto 2, osea entre la ubicacion de la Campana Verde y el punto ingresado
@@ -23,5 +23,4 @@ class CampanaVerde:
         Requiere: nada
         Devuelve: Un mensaje de tipo STR que contiene la direccion, materiales y barrio de la campana verde C separados por @ y con <> al principio y al final respectivamente. Cabe mencionar que los materiales que se pueden depositar van a estar seprados por /.
         '''
-        return ('<' + self.direccion + '@' + str(self.materiales) + '@' + self.barrio + '>') #checkear si esto seria STR o deberiamos hacer STR() a los self.algo
-
+        return ('<' + self.direccion + '@' + str('/'.join(self.materiales)) + '@' + self.barrio + '>')
