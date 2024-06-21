@@ -1,4 +1,4 @@
-from haversine import haversine , Unit
+#from haversine import haversine , Unit
 from campana_verde import CampanaVerde
 import csv
 
@@ -13,7 +13,7 @@ class DataSetCampanasVerdes:
             direccion:str=linea['direccion']
             barrio:str=linea['barrio']
             comuna:int=linea['comuna']
-            materiales:set[str]=set(linea['materiales'].split('/'))
+            materiales:set[str]=set(linea['materiales'].split(' / '))
             latitudylongitud:tuple[float, float] = (0.0, 0.0) #ESTO NO ES CORRECTO PORQUE NO SON SIEMPRE IGUAL DE LARGOS!
             #longitud:float = float(linea['WKT'][25:41])          
             campana:CampanaVerde=CampanaVerde(direccion,barrio,comuna,materiales,latitudylongitud)
@@ -69,30 +69,33 @@ class DataSetCampanasVerdes:
         Requiere: Un punto del tipo Tuple que contenga su Latitud y su Longitud, ambas de tipo Float
         Devuelve: una tupla con sus tres objetos del tipo CampanaVerde, que serian las traes Campanas Verdes mas cercanas al punto ingresado
         '''
-        distancias:dict[CampanaVerde, float] = list()
-        distanciasList:list[float] =[] 
-        for campana in self.campana:
-            dist = haversine(campana.latylon, punto, unit=Unit.METERS)
-            distancias[campana] = dist
-            distanciasList.append(dist)
+        distanciasList:list[tuple[float, CampanaVerde]] =[] #esta lista contiene tuplas con su primer valor siendo la distancia correspondiente al punto ingresado respectivamente de la CampanaVerde y el segundo valor de la tupla la CampanaVerde 
+        
+        for campana in self.campanas:
+            dist = campana.distancia(punto)
+            distanciasList.append((dist, campana))      
+        
         distanciasList.sort()
+        res:tuple[CampanaVerde, CampanaVerde, CampanaVerde] =  (distanciasList[0][1], distanciasList[1][1], distanciasList[2][1])
+        
+        return res
+        
         #distancias[0] =  
         #cerca1 = 
         #res:tuple[CampanaVerde, CampanaVerde, CampanaVerde] = {, }
-        #return res
-            
 
     def exportar_por_materiales(self, materiales:set[str]):
         f2 = open('archivo_csv', 'w')
-        f2.write('DIRECCION y BARRIO')
+        f2.write('DIRECCION,BARRIO')
+        f2.write('\n')
         for campana in self.campanas:
-            if materiales in campana.materiales:
-                f2.write(campana.direccion + campana.barrio + '\n')
+            if materiales == campana.materiales:
+                f2.write(campana.direccion + ',' + campana.barrio + '\n')
         f2.close()
-        
 
 
 d:DataSetCampanasVerdes = DataSetCampanasVerdes('campanas-verdes-acortado.csv')
 #print(d.barrios())
-print(d.cantidad_por_barrio('Papel '))
-#print(d.exportar_por_materiales({' Vidrio'})) #los materiales vienen con el espacio que tienen en el CSV deberia eliminarse o darse por hecho que el usuario lo usara correctamente?
+#print(d.cantidad_por_barrio('Carton'))
+#print(d.tres_campanas_cercanas((-58.5048544020916, -34.5746919792015)))
+print(d.exportar_por_materiales({'Papel', 'Carton'})) #los materiales vienen con el espacio que tienen en el CSV deberia eliminarse o darse por hecho que el usuario lo usara correctamente?
