@@ -11,12 +11,12 @@ class CampanaVerde:
         #self.longitud:str = lon
         self.latitudylongitud:tuple[float, float] = latylon
 
-    def distancia(self, ubicacionCampana:tuple[float, float], punto:tuple[float, float]) -> tuple[float, float]:     
+    def distancia(self, punto:tuple[float, float]) -> tuple[float, float]:     
         ''' 
         Requiere: una direccion valida con el eje X (o latitud) en el primer float de la tupla y con el eje Y (o longitud) en el segundo float de la tupla
         Devuelve: La distancia entre el punto 1 y el punto 2, osea entre la ubicacion de la Campana Verde y el punto ingresado
         '''
-        return haversine(ubicacionCampana, punto, unit=Unit.METERS)
+        return haversine(self.latitudylongitud, punto, unit=Unit.METERS)
 
     def __repr__(self) -> str:
         '''
