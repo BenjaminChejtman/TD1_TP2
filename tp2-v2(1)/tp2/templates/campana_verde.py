@@ -24,13 +24,10 @@ class CampanaVerde:
         Devuelve: Un mensaje de tipo STR que contiene la direccion, materiales y barrio de la campana verde C separados por @ y con <> al principio y al final respectivamente. Cabe mencionar que los materiales que se pueden depositar van a estar seprados por /.
         '''
         return ('<' + self.direccion + '@' + str('/'.join(self.materiales)) + '@' + self.barrio + '>')
-    
+'''    
     def __eq__(self, other) -> str:
-        return self.direccion == other.direccion
-        return self.barrio == other.barrio
-        return self.comuna == other.comuna
-        return self.materiales == other.materiales
-        return self.latitudylongitud == other.latitudylongitud
-    
+        return self.direccion == other.direccion and self.barrio == other.barrio and self.comuna == other.comuna and self.materiales == other.materiales and self.latitudylongitud == other.latitudylongitud
+'''
+
     
         
