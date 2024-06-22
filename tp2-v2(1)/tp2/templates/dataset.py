@@ -96,7 +96,8 @@ class DataSetCampanasVerdes:
 
 
 d:DataSetCampanasVerdes = DataSetCampanasVerdes('campanas-verdes-acortado.csv')
+print(d.tamano())
 #print(d.barrios())
 #print(d.cantidad_por_barrio('Carton'))
-print(d.tres_campanas_cercanas((-58.5048544020916, -34.5746919192015)))
+#print(d.tres_campanas_cercanas((-58.5048544020916, -34.5746919192015)))
 #print(d.exportar_por_materiales({'Papel', 'Carton'})) #los materiales vienen con el espacio que tienen en el CSV deberia eliminarse o darse por hecho que el usuario lo usara correctamente?
