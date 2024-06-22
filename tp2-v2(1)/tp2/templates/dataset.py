@@ -157,4 +157,4 @@ def leer_archivo_v1(filename:str) -> str:
 
 
 
-#print(d.tres_campanas_cercanas2((-58.5048544020916, -34.5746919192015)))
+#print(d.tres_campanas_cercanas((-20.5048544020916, -34.5746919192015)))
