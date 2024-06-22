@@ -29,8 +29,8 @@ class TestDataSetCampanasVerdes(unittest.TestCase):
         self.assertEqual(d.cantidad_por_barrio('Carton'),{'VILLA DEVOTO':1, 'VILLA CRESPO':2, 'NUEVA POMPEYA':1, 'MONTE CASTRO':1, 'CHACARITA':1})   
         self.assertNotEqual(d.cantidad_por_barrio('Carton'),{'VILLA DEVOTO':6, 'VILLA CRESPO':42, 'NUEVA POMPEYA':1, 'MONTE CASTRO':-7, 'CHACARITA':1})
 
-    def test_tres_campanas_cercanas(self):
-        pass    
+    #def test_tres_campanas_cercanas(self):
+          
 
     def test_exportar_por_materiales(self):
         d.exportar_por_materiales({'Papel', 'Carton'})
