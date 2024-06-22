@@ -64,23 +64,41 @@ class DataSetCampanasVerdes:
                 else:
                     campanasPorBarrio[campana.barrio] = 1              
         return campanasPorBarrio
+    
+    def cantidad_por_barrio2(self, material:str) -> dict[str, int]:
+        '''
+        Requiere: un DataSet D de Campanas Verdes y un material en especifico
+        Devuelve: un Dict que indica la cantidad de campanas verdes que hay en cada barrio en el que se puede depositar el material indicado
+        '''
+        campanasPorBarrio:dict[str, int] = dict()
+        for campana in self.campanas:
+            if material in campana.materiales and campana.barrio in campanasPorBarrio: 
+                campanasPorBarrio[campana.barrio] = campanasPorBarrio[campana.barrio] + 1
+            elif material in campana.materiales and campana.barrio not in campanasPorBarrio:
+                campanasPorBarrio[campana.barrio] = 1  
+        return campanasPorBarrio
 
     def tres_campanas_cercanas(self, punto:tuple[float, float]) -> tuple[CampanaVerde, CampanaVerde, CampanaVerde]: #la consigna pide lat y lng como parametros por separado, preguntar si ak hacerlo como una tupla como nosotros lo hicimos esteria bien o mal
         '''
         Requiere: Un punto del tipo Tuple que contenga su Latitud y su Longitud, ambas de tipo Float
         Devuelve: una tupla con sus tres objetos del tipo CampanaVerde, que serian las traes Campanas Verdes mas cercanas al punto ingresado
         '''
-        distanciasList:list[float] = [] #esta lista contiene tuplas con su primer valor siendo la distancia correspondiente al punto ingresado respectivamente de la CampanaVerde y el segundo valor de la tupla la CampanaVerde 
-        
+        tresMasCercanas:tuple[CampanaVerde, CampanaVerde, CampanaVerde] = (self.campanas[0], self.campanas[1], self.campanas[2])
         for campana in self.campanas:
+            
             dist = campana.distancia(punto)
-            distanciasList.append(dist)      
-        
-        distanciasList.sort()
-        res:tuple[float, float, float] = (distanciasList[0], distanciasList[1], distanciasList[2])
-        
-        return res
-
+            primero = tresMasCercanas[0].distancia(punto)
+            segundo = tresMasCercanas[1].distancia(punto)
+            tercero = tresMasCercanas[2].distancia(punto)
+            
+            if dist < primero:
+                tresMasCercanas = (campana, tresMasCercanas[0], tresMasCercanas[1])
+            elif dist < segundo and dist > primero:
+                tresMasCercanas = tresMasCercanas[0], campana, tresMasCercanas[1]
+            elif dist < tercero and dist > segundo:
+                tresMasCercanas = tresMasCercanas[0], tresMasCercanas[1], campana
+        return tresMasCercanas
+ 
     def exportar_por_materiales(self, materiales:set[str]):
         '''
         Requiere: un conjunto de materiales 'Materiales'
@@ -94,9 +112,7 @@ class DataSetCampanasVerdes:
                 f2.write(campana.direccion + ',' + campana.barrio + '\n')
         f2.close()
 
-
-d:DataSetCampanasVerdes = DataSetCampanasVerdes('campanas-verdes-acortado.csv')
-
+######################## FUNCION EXTRA PARA PODER TESTEAR ##########################################
 
 def leer_archivo_v1(filename:str) -> str:
     ''' Requiere: filename es el nombre de un archivo de texto.
@@ -105,12 +121,40 @@ def leer_archivo_v1(filename:str) -> str:
     f = open(filename, encoding="utf8")   # especificar encoding si es necesario
     todo:str = f.read()
     return todo
-#
+
+####################################################################################################
+
+
+
+#d:DataSetCampanasVerdes = DataSetCampanasVerdes('campanas-verdes-acortado.csv')
 #print(leer_archivo_v1('archivo_csv'))
 #print(d.tamano())
 #print(d.barrios())
-#print(d.cantidad_por_barrio('Carton'))
+#print(d.cantidad_por_barrio2('Carton'))
 #print(d.tres_campanas_cercanas((-58.5048544020916, -34.5746919192015)))
 #print(d.exportar_por_materiales({'Papel', 'Carton'})) #los materiales vienen con el espacio que tienen en el CSV deberia eliminarse o darse por hecho que el usuario lo usara correctamente?
 #print(d.campanas_del_barrio('VILLA DEVOTO'))
 #print(type(d.campanas_del_barrio('VILLA DEVOTO')))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#print(d.tres_campanas_cercanas2((-58.5048544020916, -34.5746919192015)))
