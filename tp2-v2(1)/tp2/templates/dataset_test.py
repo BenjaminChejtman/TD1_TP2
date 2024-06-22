@@ -20,13 +20,14 @@ class TestDataSetCampanasVerdes(unittest.TestCase):
         self.assertEqual(d.barrios(),{'VILLA DEVOTO', 'VILLA CRESPO', 'NUEVA POMPEYA', 'MONTE CASTRO', 'CHACARITA'})
 
     def test_campanas_del_barrio(self):
-        #self.assertEqual(d.campanas_del_barrio('VILLA DEVOTO'),[<CERVANTES 3896@Carton/Papel@VILLA DEVOTO>])    
-        pass
+        esperado:CampanaVerde = CampanaVerde("CERVANTES 3896","VILLA DEVOTO",11,{"Papel", "Carton"},(-58.5267564075838, -34.6083119977315))
+        listEsperado = [esperado]
+        self.assertEqual(d.campanas_del_barrio('VILLA DEVOTO'), listEsperado)    
+        
 
     def test_cantidad_por_barrio(self):
         self.assertEqual(d.cantidad_por_barrio('Carton'),{'VILLA DEVOTO':1, 'VILLA CRESPO':2, 'NUEVA POMPEYA':1, 'MONTE CASTRO':1, 'CHACARITA':1})   
         self.assertNotEqual(d.cantidad_por_barrio('Carton'),{'VILLA DEVOTO':6, 'VILLA CRESPO':42, 'NUEVA POMPEYA':1, 'MONTE CASTRO':-7, 'CHACARITA':1})
-
 
     def test_tres_campanas_cercanas(self):
         pass    
@@ -36,6 +37,10 @@ class TestDataSetCampanasVerdes(unittest.TestCase):
         resultado:str = leer_archivo_v1('archivo_csv')
         valor = 'DIRECCION,BARRIO\nAGUIRRE 1447,CHACARITA\nBERMUDEZ 1697,MONTE CASTRO\nCERVANTES 3896,VILLA DEVOTO\nCASTILLO 77,VILLA CRESPO\nCASTILLO 77,VILLA CRESPO\n'
         self.assertEqual(resultado, valor)
+
+
+
+
 
 
 #d.exportar_por_materiales({'Papel', 'Carton'})
