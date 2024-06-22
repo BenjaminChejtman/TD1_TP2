@@ -29,9 +29,10 @@ class TestDataSetCampanasVerdes(unittest.TestCase):
         self.assertEqual(d.cantidad_por_barrio('Carton'),{'VILLA DEVOTO':1, 'VILLA CRESPO':2, 'NUEVA POMPEYA':1, 'MONTE CASTRO':1, 'CHACARITA':1})   
         self.assertNotEqual(d.cantidad_por_barrio('Carton'),{'VILLA DEVOTO':6, 'VILLA CRESPO':42, 'NUEVA POMPEYA':1, 'MONTE CASTRO':-7, 'CHACARITA':1})
 
-    #def test_tres_campanas_cercanas(self):
-          
-
+    def test_tres_campanas_cercanas(self):
+        self.assertEqual(d.tres_campanas_cercanas((-58.5048544020916, -34.5746919192015)), (<BERMUDEZ 1697@Papel/Carton@MONTE CASTRO>, <CERVANTES 3896@Papel/Carton@VILLA DEVOTO>, <AGUIRRE 1447@Papel/Carton@CHACARITA>))    
+        self.assertEqual(d.tres_campanas_cercanas((-20.5048544020916, -34.5746919192015)), (<BERMUDEZ 1697@Papel/Carton@MONTE CASTRO>, <CERVANTES 3896@Papel/Carton@VILLA DEVOTO>, <AGUIRRE 1447@Papel/Carton@CHACARITA>))    
+        
     def test_exportar_por_materiales(self):
         d.exportar_por_materiales({'Papel', 'Carton'})
         resultado:str = leer_archivo_v1('archivo_csv')
