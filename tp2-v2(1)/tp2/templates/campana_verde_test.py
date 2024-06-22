@@ -25,13 +25,13 @@ class TestCampanaVerde(unittest.TestCase):
         
     def test_CampanaVerde_distancia(self): #En este conjunto de tests vamos a revisar si la función en sí es correcta y hace lo que le pedimos.
         #Campanas Modelo
-        campana1:CampanaVerde=CampanaVerde("Olazabal 4470","Villa Urquiza",12,{"Cartón"},(-34.57265575560225, -58.479309232841445))
-        campana2:CampanaVerde=CampanaVerde("Paseo de las Américas","Palermo",14,{"Basura"},(-34.55112612847545, -58.435818911529196))
+        campana1:CampanaVerde=CampanaVerde("Olazabal 4470","Villa Urquiza",12,{"Cartón"},(-58.479309232841445,-34.57265575560225))
+        campana2:CampanaVerde=CampanaVerde("Paseo de las Américas","Palermo",14,{"Basura"},(-58.435818911529196,-34.55112612847545))
         campana3:CampanaVerde=CampanaVerde("______","_______",12,{"__"}, (-95.57265575560225, -90.479309232841445))
 
-        puntoprueba1:tuple[float, float]=(-34.57265575560225, -58.479309232841445)
-        puntoprueba2:tuple[float, float]=(-32.55112612347545, -59.433578911529196)
-        puntoprueba3:tuple[float, float]=(-20.57265573450225, -18.472841445)
+        puntoprueba1:tuple[float, float]=(-58.479309232841445,-34.57265575560225)
+        puntoprueba2:tuple[float, float]=(-59.433578911529196,-32.55112612347545)
+        puntoprueba3:tuple[float, float]=(-18.472841445,-20.57265573450225)
         
         self.assertAlmostEqual(campana1.distancia(puntoprueba1), 0.0) #Caso en el que son el mismo punto, por lo que su distancia corresponde que sea 0.0
         self.assertAlmostEqual(campana2.distancia(puntoprueba2), 240841.14170973774) #Caso con un resultado menor
@@ -39,8 +39,8 @@ class TestCampanaVerde(unittest.TestCase):
 
     
     def test_repr(self):
-        campana1:CampanaVerde=CampanaVerde("Laprida 1149","Recoleta",2,{"Plástico"},(-34.59560785539046, -58.40803234691601))
-        campana2:CampanaVerde=CampanaVerde("Ibarrola 7051","Liniers",9,{"Papel","Cartón"},(-34.64016129701416, -58.525036515246306))
+        campana1:CampanaVerde=CampanaVerde("Laprida 1149","Recoleta",2,{"Plástico"},(-58.40803234691601,-34.59560785539046))
+        campana2:CampanaVerde=CampanaVerde("Ibarrola 7051","Liniers",9,{"Papel","Cartón"},(-58.525036515246306,-34.64016129701416))
         self.assertEqual(str(campana1), '<Laprida 1149@Plástico@Recoleta>')
         self.assertEqual(str(campana2), '<Ibarrola 7051@Papel/Cartón@Liniers>')
         
