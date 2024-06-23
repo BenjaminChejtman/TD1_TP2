@@ -45,11 +45,11 @@ class DataSetCampanasVerdes:
         Requiere: un DataSet D de Campanas Verdes y un barrio en especifico
         Devuelve: una List de CampanaVerde que contiene las campanas verdes del DataSet D que estan en el barrio seleccionado
         '''
-        campanasEnBarrio:list[CampanaVerde] = []
-        for campana in self.campanas:
-            if campana.barrio == barrio:
-                campanasEnBarrio.append(campana)
-        return campanasEnBarrio
+        campanasEnBarrio:list[CampanaVerde] = [] #creamos nuestra lista donde guardaremos las campanas verdes del barrio
+        for campana in self.campanas:  # Recorremos las campanas verdes
+            if campana.barrio == barrio: # Si el barrio de la campana coincide con el barrio seleccionado por parametro...
+                campanasEnBarrio.append(campana) # ... agrgamos esa campana a nuestra lista
+        return campanasEnBarrio # devolvemos la lista campanasEnBarrio
         
     def cantidad_por_barrio(self, material:str) -> dict[str, int]:
         '''
@@ -57,7 +57,7 @@ class DataSetCampanasVerdes:
         Devuelve: un Dict que indica la cantidad de campanas verdes que hay en cada barrio en el que se puede depositar el material indicado
         '''
         campanasPorBarrio:dict[str, int] = dict()
-        for campana in self.campanas:
+        for campana in self.campanas: # Recorremos las campanas verdes
             if material in campana.materiales:
                 if campana.barrio in campanasPorBarrio: #checkeamos si el barrio ya fue creado en el Dict
                     campanasPorBarrio[campana.barrio] = campanasPorBarrio[campana.barrio] + 1
@@ -71,7 +71,7 @@ class DataSetCampanasVerdes:
         Devuelve: un Dict que indica la cantidad de campanas verdes que hay en cada barrio en el que se puede depositar el material indicado
         '''
         campanasPorBarrio:dict[str, int] = dict()
-        for campana in self.campanas:
+        for campana in self.campanas:   # Recorremos las campanas verdes
             if material in campana.materiales and campana.barrio in campanasPorBarrio: # Nos fijamos si la campana verde permite el material indicado y si el barrio donde esta ya se encuentra en el Dict camapanasPorBarrio
                 campanasPorBarrio[campana.barrio] = campanasPorBarrio[campana.barrio] + 1 # En caso de ser asi le agregamos uno al numero que ya habia
             elif material in campana.materiales and campana.barrio not in campanasPorBarrio: # En caso de que el material este permitido en esa campana verde pero aun no se encuentre en el Dict...
@@ -114,12 +114,12 @@ class DataSetCampanasVerdes:
 ######################## FUNCION EXTRA PARA PODER TESTEAR ##########################################
 
 def leer_archivo_v1(filename:str) -> str:
-    ''' Requiere: filename es el nombre de un archivo de texto.
-        Devuelve: Todo el contenido del archivo como un único string.
+    ''' Requiere: filename, el cual es el nombre de un archivo de texto
+        Devuelve: Todo el contenido del archivo como un único string
     '''
-    f = open(filename, encoding="utf8")   # especificar encoding si es necesario
-    todo:str = f.read()
-    return todo
+    f = open(filename, encoding="utf8")   # abrimos el archvio al cual llamamos filename
+    todo:str = f.read() # pasamos su contenido a un string
+    return todo # devolvemos ese string
 
 ####################################################################################################
 
