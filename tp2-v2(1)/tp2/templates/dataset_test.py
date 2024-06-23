@@ -48,7 +48,7 @@ class TestDataSetCampanasVerdes(unittest.TestCase):
         self.assertEqual(resultado, valor)
 
 
-print(d2.barrios())
+#print(d2.barrios())
 #print(d.campanas_del_barrio('VILLA CRESPO'))
 
 
