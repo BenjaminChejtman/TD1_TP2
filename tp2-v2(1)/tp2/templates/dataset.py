@@ -28,16 +28,17 @@ class DataSetCampanasVerdes:
         Devuelve: la cantidad de Campanas Verdes en el DataSet D
         '''
         return len(self.campanas)
-
-    def barrios(self) -> set[str]: 
+    
+    def barrios(self) -> set[str]:
         '''
         Requiere: nada
         Devuelve: un Set que contiene los barrios existentes en el DataSet D
             
         '''
         vrBarrios:set[str] = set()
-        for campana in self.campanas:   
-            vrBarrios.add(campana.barrio)   #agregamos a vrBarrios el barrio correspondiente a cada campana, y como en un set no se repite no es necesario checkear si ya estaba o no dicho barrio
+        for campana in self.campanas:
+            for barrio in campana.barrio:
+                vrBarrios.add(campana.barrio) #agregamos a vrBarrios el barrio correspondiente a cada campana, y como en un set no se repite no es necesario checkear si ya estaba o no dicho barrio
         return vrBarrios
     
     def campanas_del_barrio(self, barrio:str) -> list[CampanaVerde]:
