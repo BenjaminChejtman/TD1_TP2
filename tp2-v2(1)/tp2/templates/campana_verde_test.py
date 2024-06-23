@@ -26,8 +26,8 @@ class TestCampanaVerde(unittest.TestCase):
     def test_CampanaVerde_distancia(self): #En este conjunto de tests vamos a revisar si la función en sí es correcta y hace lo que le pedimos.
         #Campanas Modelo
         campana1:CampanaVerde=CampanaVerde("Olazabal 4470","Villa Urquiza",12,{"Cartón"},(-58.479309232841445,-34.57265575560225))
-        campana2:CampanaVerde=CampanaVerde("Paseo de las Américas","Palermo",14,{"Basura"},(-58.435818911529196,-34.55112612847545))
-        campana3:CampanaVerde=CampanaVerde("______","_______",12,{"__"}, (-95.57265575560225, -90.479309232841445))
+        campana2:CampanaVerde=CampanaVerde("Alcorta 2874","Palermo",14,{"Vidrio"},(-58.435818911529196,-34.55112612847545))
+        campana3:CampanaVerde=CampanaVerde("Libertador 6796","Nuñez",12,{"Papel"}, (-95.57265575560225, -90.479309232841445))
 
         puntoprueba1:tuple[float, float]=(-58.479309232841445,-34.57265575560225)
         puntoprueba2:tuple[float, float]=(-59.433578911529196,-32.55112612347545)
