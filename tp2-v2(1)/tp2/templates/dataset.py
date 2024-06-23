@@ -135,26 +135,4 @@ def leer_archivo_v1(filename:str) -> str:
 #print(d.exportar_por_materiales({'Papel', 'Carton'})) #los materiales vienen con el espacio que tienen en el CSV deberia eliminarse o darse por hecho que el usuario lo usara correctamente?
 #print(d.campanas_del_barrio('VILLA DEVOTO'))
 #print(type(d.campanas_del_barrio('VILLA DEVOTO')))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #print(d.tres_campanas_cercanas((-20.5048544020916, -34.5746919192015)))
